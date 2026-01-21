@@ -1,8 +1,9 @@
 from playwright.sync_api import sync_playwright, expect
 
 with sync_playwright() as playwright:
-    browser_launch = playwright.chromium.launch(headless=False)
-    page_new = browser_launch.new_page()
+    browser = playwright.chromium.launch(headless=False)
+    context = browser.new_context() # для сохранения данных в локал сторадже, baseURL, размер экрана, локаль и пр.
+    page_new = context.new_page()
 
     page_new.goto('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration')
 
@@ -17,8 +18,15 @@ with sync_playwright() as playwright:
 
     registration_button = page_new.get_by_test_id('registration-page-registration-button')
     registration_button.click()
-    expect(page_new).to_have_url('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/dashboard')
 
-    title = page_new.get_by_test_id('dashboard-toolbar-title-text')
-    expect(title).to_have_text('Dashboard')
+    context.storage_state(path='browser-state.json')  # Сохранение состояние браузера (куки и localStorage) в файл
 
+with sync_playwright() as playwright:
+    browser = playwright.chromium.launch(headless=False)
+    context = browser.new_context(storage_state='browser-state.json')
+    page_new = context.new_page()
+    # page_new = browser.new_page() # без контекста
+
+    page_new.goto('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/dashboard')
+
+    page_new.wait_for_timeout(50000)
