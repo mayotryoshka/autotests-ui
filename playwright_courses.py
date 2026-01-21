@@ -40,5 +40,5 @@ with sync_playwright() as playwright:
     expect(empty_result_icon).to_be_visible()
 
     empty_result_text = page_new.get_by_test_id('courses-list-empty-view-description-text')
-    expect(empty_result_header).to_be_visible()
+    expect(empty_result_text).to_be_visible()
     expect(empty_result_text).to_have_text('Results from the load test pipeline will be displayed here')
