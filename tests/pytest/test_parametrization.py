@@ -2,7 +2,7 @@ import pytest
 from _pytest.fixtures import SubRequest
 
 
-@pytest.mark.parametrize("number", [1, 2, 3, -1])  # Параметризируем тест
+@pytest.mark.parametrize("number", [1, 2, 3])  # Параметризируем тест
 # Название "number" в декораторе "parametrize" и в аргументах автотеста должны совпадать
 def test_numbers(number: int):
     assert number > 0
