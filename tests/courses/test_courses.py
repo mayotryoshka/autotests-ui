@@ -54,6 +54,52 @@ class TestCourses:
                 estimated_time='2 weeks'
         )
 
+    def test_edit_course(self, courses_list_page: CoursesListPage, create_course_page: CreateCoursePage):
+        create_course_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses/create')
+
+        create_course_page.create_course_form.fill(
+            title='Test course',
+            estimated_time='4 weeks',
+            description='Test course description',
+            max_score='222',
+            min_score='22'
+        )
+        create_course_page.image_upload_widget.upload_preview_image('./testdata/files/image.png')
+        create_course_page.create_course_toolbar.click_create_course_button()
+
+        courses_list_page.course_view.check_visible(
+            index=0,
+            title='Test course',
+            estimated_time='4 weeks',
+            max_score='222',
+            min_score='22'
+        )
+
+        courses_list_page.course_view.menu.menu_button.click()
+        courses_list_page.course_view.menu.edit_menu_item.click()
+
+        create_course_page.create_course_form.fill(
+            title='EDITED_Test course',
+            estimated_time='7 weeks',
+            description='EDITED_Test course description',
+            max_score='333',
+            min_score='33'
+        )
+        create_course_page.create_course_toolbar.click_create_course_button()
+
+        courses_list_page.course_view.check_visible(
+            index=0,
+            title='EDITED_Test course',
+            estimated_time='7 weeks',
+            max_score='333',
+            min_score='33'
+        )
+
+
+
+
+
+
 
 
 
