@@ -6,6 +6,8 @@ from components.authentication.registration_form_component import RegistrationFo
 from elements.button import Button
 from elements.link import Link
 
+import re
+
 
 class RegistrationPage(BasePage):
     def __init__(self, page: Page):
@@ -20,4 +22,6 @@ class RegistrationPage(BasePage):
 
     def click_login_link(self):
         self.login_link.click()
+        # Добавили проверку
+        self.check_current_url(re.compile(".*/#/auth/login"))
 

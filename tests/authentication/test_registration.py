@@ -1,12 +1,13 @@
 import pytest
 
 from fixtures.pages import dashboard_page
-from pages.registration_page import RegistrationPage
-from pages.dashboard_page import DashboardPage
+from pages.authentication.registration_page import RegistrationPage
+from pages.dashboard.dashboard_page import DashboardPage
 
 @pytest.mark.regression
 @pytest.mark.registration
-def test_successful_registration(registration_page: RegistrationPage, dashboard_page: DashboardPage):
+class TestRegistration:
+    def test_successful_registration(self, registration_page: RegistrationPage, dashboard_page: DashboardPage):
         registration_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration')
         registration_page.registration_form.fill(
             email='user.name@gmail.com',
@@ -14,4 +15,5 @@ def test_successful_registration(registration_page: RegistrationPage, dashboard_
             password='password'
         )
         registration_page.click_registration_button()
+
         dashboard_page.dashboard_toolbar_view.check_visible()
