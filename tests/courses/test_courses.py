@@ -8,6 +8,8 @@ from tools.allure.features import AllureFeature
 from tools.allure.stories import AllureStory
 from allure_commons.types import Severity
 
+from config import settings
+
 
 @pytest.mark.courses
 @pytest.mark.regression
@@ -25,7 +27,7 @@ class TestCourses:
         courses_list_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses')
 
         courses_list_page.sidebar.check_visible()
-        courses_list_page.navbar.check_visible("username")
+        courses_list_page.navbar.check_visible(settings.test_user.username)
 
         courses_list_page.courses_list_toolbar_view.check_visible()
         courses_list_page.check_visible_empty_view()
@@ -48,7 +50,7 @@ class TestCourses:
         create_course_page.create_exercise_toolbar.check_visible()
         create_course_page.check_visible_exercises_empty_view()
 
-        create_course_page.image_upload_widget.upload_preview_image('./testdata/files/image.png')
+        create_course_page.image_upload_widget.upload_preview_image(settings.test_data.image_png_file)
         create_course_page.image_upload_widget.check_visible(is_image_uploaded=True)
 
         create_course_page.create_course_form.fill(
@@ -83,7 +85,7 @@ class TestCourses:
             max_score='222',
             min_score='22'
         )
-        create_course_page.image_upload_widget.upload_preview_image('./testdata/files/image.png')
+        create_course_page.image_upload_widget.upload_preview_image(settings.test_data.image_png_file)
         create_course_page.create_course_toolbar.click_create_course_button()
 
         courses_list_page.course_view.check_visible(

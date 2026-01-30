@@ -8,6 +8,9 @@ from tools.allure.features import AllureFeature
 from tools.allure.stories import AllureStory
 from allure_commons.types import Severity
 
+from config import settings
+
+
 
 @pytest.mark.dashboard
 @pytest.mark.regression
@@ -25,7 +28,7 @@ class TestDashboard:
         dashboard_page_with_state.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/dashboard")
 
         dashboard_page_with_state.sidebar.check_visible()
-        dashboard_page_with_state.navbar.check_visible("username")
+        dashboard_page_with_state.navbar.check_visible(settings.test_user.username)
         dashboard_page_with_state.dashboard_toolbar_view.check_visible()
 
         dashboard_page_with_state.check_visible_scores_chart()
