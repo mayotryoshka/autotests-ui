@@ -94,8 +94,8 @@ class TestCourses:
             min_score='22'
         )
 
-        courses_list_page.course_view.menu.menu_button.click()
-        courses_list_page.course_view.menu.edit_menu_item.click()
+        #courses_list_page.course_view.menu.menu_button.click()
+        courses_list_page.course_view.menu.click_edit(index=0)
 
         create_course_page.create_course_form.fill(
             title='EDITED_Test course',
