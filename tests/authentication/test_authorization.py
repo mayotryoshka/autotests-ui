@@ -29,9 +29,8 @@ class TestAuthorization:
             self,
             dashboard_page: DashboardPage,
             login_page: LoginPage,
-            registration_page: RegistrationPage,
-
-    ):
+            registration_page: RegistrationPage
+):
         registration_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration')
         registration_page.registration_form.fill(
             email=settings.test_user.email,
