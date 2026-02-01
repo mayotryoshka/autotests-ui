@@ -55,6 +55,7 @@ class Settings(BaseSettings):
         return Settings(
             videos_dir=videos_dir,
             tracing_dir=tracing_dir,
+            allure_results_dir=allure_results_dir,  # Передаем allure_results_dir в инициализацию настроек
             browser_state_file=browser_state_file
         )
 
