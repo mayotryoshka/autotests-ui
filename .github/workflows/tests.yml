@@ -52,6 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: run-tests  # <-- зависимость: выполнять только после успешного run-tests
 
+
     steps:
       # 1. Скачиваем репозиторий (нужен для получения контекста и для прав на деплой)
       - name: Check out repository

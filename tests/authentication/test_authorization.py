@@ -25,7 +25,7 @@ from tools.routes import AppRoute
 class TestAuthorization:
     @allure.title('User login with correct email and password')
     @allure.severity(Severity.BLOCKER)
-    def test_successful_authorization(
+    def test_successful_authorization_edited(
             self,
             dashboard_page: DashboardPage,
             login_page: LoginPage,
