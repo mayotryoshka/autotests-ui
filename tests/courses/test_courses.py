@@ -24,7 +24,7 @@ from config import settings
 class TestCourses:
     @allure.title("Check displaying of empty courses list")
     @allure.severity(Severity.NORMAL)
-    def test_empty_courses_list_edited(self, courses_list_page: CoursesListPage):
+    def test_empty_courses_list(self, courses_list_page: CoursesListPage):
         courses_list_page.visit(AppRoute.COURSES)
 
         courses_list_page.sidebar.check_visible()

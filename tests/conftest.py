@@ -1,6 +1,7 @@
 import pytest
 from playwright.sync_api import sync_playwright, Page, Playwright
-
+from config import settings
+from collections.abc import Generator
 
 # @pytest.fixture
 # def chromium_page() -> Page:
@@ -11,15 +12,15 @@ from playwright.sync_api import sync_playwright, Page, Playwright
 
 
 @pytest.fixture
-def chromium_page(playwright: Playwright) -> Page:
-    browser_launch = playwright.chromium.launch(headless=False)
+def chromium_page(playwright: Playwright) -> Generator[Page, None, None]:
+    browser_launch = playwright.chromium.launch(headless=settings.headless)
     yield browser_launch.new_page()
     browser_launch.close()
 
 
 @pytest.fixture(scope='session')
 def initialize_browser_state(playwright: Playwright):
-    browser = playwright.chromium.launch(headless=False)
+    browser = playwright.chromium.launch(headless=settings.headless)
     context = browser.new_context()
     page_new = context.new_page()
     page_new.goto('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration')
@@ -41,8 +42,8 @@ def initialize_browser_state(playwright: Playwright):
 
 
 @pytest.fixture(scope='function')
-def chromium_page_with_state(initialize_browser_state, playwright: Playwright) -> Page:
-    browser = playwright.chromium.launch(headless=False)
+def chromium_page_with_state(initialize_browser_state, playwright: Playwright) -> Generator[Page, None, None]:
+    browser = playwright.chromium.launch(headless=settings.headless)
     context = browser.new_context(storage_state='browser-state.json')
     yield context.new_page()
     browser.close()
