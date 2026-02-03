@@ -36,9 +36,9 @@ jobs:
       # 4. Шаг для запуска тестов с использованием pytest и генерации отчётов Allure
       - name: Run Playwright tests with pytest and generate Allure results
         run: |
-          pytest -m regression --alluredir=allure-results --numprocesses 2  # Запускаем тесты, отмеченные как "regression", генерируем результаты для Allure
+          pytest -m regression --alluredir=allure-results --numprocesses 2 
 
-      # 5. Сохраняем папку allure-results как артефакт, чтобы передать её в следующую джобу
+      # 5. Сохраняем папку allure-results как артефакт, чтобы передать её
       - name: Upload Allure results artifact
         # Используем стандартный action для загрузки артефактов
         uses: actions/upload-artifact@v4
@@ -46,7 +46,7 @@ jobs:
           name: allure-results
           path: allure-results
 
-  # Джоба, которая публикует отчёт на GitHub Pages
+  # Шаги, которые публикуют отчёт на GitHub Pages
   # Она выполнится только после успешного выполнения run-tests (needs)
   publish-report:
     runs-on: ubuntu-latest
@@ -58,13 +58,13 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      # 2. Скачиваем ранее сохранённый артефакт allure-results из джобы run-tests
+      # 2. Скачиваем ранее сохранённый артефакт allure-results из run-tests
       - name: Download Allure results artifact
         uses: actions/download-artifact@v4
         with:
           name: allure-results
           path: ./allure-results
-        # После этого в рабочей директории будет доступна папка ./allure-results с результатами тестов
+        # После этого в рабочей директории будет доступна папка allure-results с результатами тестов
 
       # 3. Шаг для получения истории отчётов Allure, если она существует
       - name: Get Allure history
